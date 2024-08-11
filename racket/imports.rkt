@@ -176,7 +176,8 @@
   (match v
     [(? syntax?) (->str (syntax-e v))]
     [(? symbol?) (symbol->string v)]
-    [(? string?) v]))
+    [(? string?) v]
+    [_ "?"])) ;; actually a list of syntaxes is encountered here. happens only using "typed/racket" and "match". however this str is used as key in hash for actually exported symbols of a module -> no use to "map"
 
 (define (syntax->string-set s)
   (for/set ([s (in-syntax s)])
